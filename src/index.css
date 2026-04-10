@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.active {
+    background-color: #FFFFFF;
+    color: #4C5053;
+}
