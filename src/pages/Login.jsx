@@ -44,8 +44,8 @@ function Login() {
                 </form>
 
                 <div className="text-white">
-                    <p className="text-[#FFD964] text-center mt-5 cursor-pointer">Mot de passe oublié?</p>
-                    <p className="mt-5">Vous n'avez pas de compte? <span className="text-[#FFD964] text-center">s'inscrire</span></p>
+                    <p className="text-[#FFD964] text-center mt-5 cursor-pointer cursor-pointer" onClick={() => navigate("/forgot-password")}>Mot de passe oublié?</p>
+                    <p className="mt-5">Vous n'avez pas de compte? <span className="text-[#FFD964] text-center cursor-pointer" onClick={() => navigate("/signup")}>s'inscrire</span></p>
                 </div>
             </div>
         </div>

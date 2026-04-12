@@ -4,13 +4,15 @@ import { CiSearch } from "react-icons/ci";
 import { RxDotFilled } from "react-icons/rx";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-function Header() {
+function Header({ setIsOpen }) {
     const { pathname } = useLocation();
     const routeConfig = {
         "/dashboard": "Dashboard",
         "/dashboard/listings": "Liste des hotels"
     }
+    const navigate = useNavigate();
 
     return (
         <header className="px-5 py-4 border-b border-slate-200">
@@ -28,17 +30,17 @@ function Header() {
                     <button className="relative cursor-pointer">
                         <img src="https://thumbs.dreamstime.com/b/default-profile-picture-avatar-photo-placeholder-vector-illustration-default-profile-picture-avatar-photo-placeholder-vector-189495158.jpg"
                             alt="User profile picture" className="rounded-full h-[32px] w-[32px] object-contain" />
-                        <RxDotFilled size={30} className="bottom-[-4px] right-[-13px] absolute text-green-500"/>
+                        <RxDotFilled size={30} className="bottom-[-4px] right-[-13px] absolute text-green-500" />
                     </button>
-                    <button className="cursor-pointer">
-                        <MdLogout size={24}/>
+                    <button className="cursor-pointer" onClick={() => navigate("/")}>
+                        <MdLogout size={24} />
                     </button>
                 </div>
                 <div className="flex items-center gap-4 md:hidden">
-                    <button className="cursor-pointer p-4 rounded-xl border border-gray-200">
+                    <button className="relative cursor-pointer p-4 rounded-xl border border-gray-200">
                         <CiSearch />
                     </button>
-                    <button className="cursor-pointer p-4 rounded-xl border border-gray-200">
+                    <button className="cursor-pointer p-4 rounded-xl border border-gray-200" onClick={() => setIsOpen(true)}>
                         <GiHamburgerMenu />
                     </button>
                 </div>

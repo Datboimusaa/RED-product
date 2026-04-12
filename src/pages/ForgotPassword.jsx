@@ -1,10 +1,14 @@
 import logo from "../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
+
 
 function ForgotPassword() {
+    const navigate = useNavigate();
+
     return (
         <div className="h-screen bg-[url(./assets/bg-image.jpg)] bg-[#494C4F] bg-cover bg-center bg-blend-multiply
                     flex justify-center">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center px-5">
                 <div className="flex items-center gap-2 py-4 mt-10">
                     <img src={logo} alt="Logo Red Product" />
                     <h2 className="font-bold text-xl text-white">RED PRODUCT</h2>
@@ -18,7 +22,7 @@ function ForgotPassword() {
                     <button className="bg-[#494C4F] text-white w-full py-2 rounded-md mt-10 cursor-pointer mx-auto">Envoyer</button>
                 </form>
                 <div className="mt-5 text-white">
-                    <p>Revenir à la <span className="text-[#FFD964]">connexion</span></p>
+                    <p>Revenir à la <a className="text-[#FFD964] cursor-pointer" onClick={() => navigate("/")}>connexion</a></p>
                 </div>
             </div>
         </div>

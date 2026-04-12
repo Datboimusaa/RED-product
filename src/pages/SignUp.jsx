@@ -1,6 +1,9 @@
 import logo from "../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+    const navigate = useNavigate();
+
     return (
         <div className="h-screen bg-[url(./assets/bg-image.jpg)] bg-[#494C4F] bg-cover bg-center bg-blend-multiply
                     flex justify-center">
@@ -27,7 +30,7 @@ function SignUp() {
                     <button className="bg-[#494C4F] text-white w-full py-2 rounded-md mt-10 cursor-pointer mx-auto">S'inscrire</button>
                 </form>
                 <div className="mt-5 text-white">
-                    <p>Vous avez deja un compte? <span className="text-[#FFD964]">Se connecter</span></p>
+                    <p>Vous avez deja un compte? <span className="text-[#FFD964] cursor-pointer" onClick={() => navigate("/")}>Se connecter</span></p>
                 </div>
             </div>
         </div>

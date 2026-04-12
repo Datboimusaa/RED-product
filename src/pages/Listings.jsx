@@ -1,7 +1,11 @@
 import Cards from "../components/ui/Cards"
 import { FaPlus } from "react-icons/fa6";
+import { useState } from "react";
+import CreateHotelModal from "../components/ui/CreateHotelModal";
 
 function Listings() {
+    const [openModal, setOpenModal] = useState(false);
+
     return (
         <section className="bg-slate-50">
             <div className="bg-white py-5 px-10 border-b border-gray-200">
@@ -9,9 +13,9 @@ function Listings() {
                     <div className="flex items-center gap-4">
                         <span className="text-2xl font-light">Hôtels</span> <span className="font-light text-2xl text-gray-400">8</span>
                     </div>
-                    <button className="flex items-center gap-2 border border-[#AEAEAE] rounded-xl px-4 py-2 cursor-pointer hover:bg-[#AEAEAE] hover:text-white transition duration-150">
+                    <button onClick={()=> setOpenModal(true)} className="flex items-center gap-2 border border-[#AEAEAE] rounded-xl px-4 py-2 cursor-pointer hover:bg-[#AEAEAE] hover:text-white transition duration-150">
                         <FaPlus />
-                        Creer un nouvel hôtel
+                        <span className="hidden xl:inline">Creer un nouvel hôtel</span> 
                     </button>
                 </div>
             </div>
@@ -49,7 +53,7 @@ function Listings() {
                         name={'Hotel name placeholder'}
                         price={'5000 Frs par nuit'} />
             </div>
-
+            <CreateHotelModal openModal={openModal} setOpenModal={setOpenModal} />
         </section>
     );
 }
