@@ -1,5 +1,5 @@
 import * as Brevo from "@getbrevo/brevo";
-import { BREVO_API_KEY } from "../config/env";
+import { BREVO_API_KEY } from "../config/env.js";
 
 const apiInstance = new Brevo.TransactionalEmailsApi();
 
