@@ -25,6 +25,6 @@ app.use('/api/auth', userRoutes);
 
 app.use(errorMiddleware)
 
-app.listen(PORT, () => {
+app.listen(PORT || 5500, () => {
     console.log(`server succesfully started on http://localhost:${PORT || 5500}/`)
 })
