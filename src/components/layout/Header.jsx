@@ -5,6 +5,7 @@ import { RxDotFilled } from "react-icons/rx";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Header({ setIsOpen }) {
     const { pathname } = useLocation();
@@ -13,6 +14,12 @@ function Header({ setIsOpen }) {
         "/dashboard/listings": "Liste des hotels"
     }
     const navigate = useNavigate();
+
+    const { logout } = useAuth();
+
+    const handleLogout = ()=> {
+        logout();
+    };
 
     return (
         <header className="px-5 py-4 border-b border-slate-200">
@@ -32,7 +39,7 @@ function Header({ setIsOpen }) {
                             alt="User profile picture" className="rounded-full h-[32px] w-[32px] object-contain" />
                         <RxDotFilled size={30} className="bottom-[-4px] right-[-13px] absolute text-green-500" />
                     </button>
-                    <button className="cursor-pointer" onClick={() => navigate("/")}>
+                    <button className="cursor-pointer" onClick={handleLogout}>
                         <MdLogout size={24} />
                     </button>
                 </div>

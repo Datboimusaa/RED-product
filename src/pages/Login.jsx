@@ -1,14 +1,34 @@
+import { useState } from "react";
 import logo from "../assets/logo.svg";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 function Login() {
-
+    const { login } = useAuth();
     const navigate = useNavigate();
 
-    const redirectToDashboard = (e) => {
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleLogin = async (e) => {
         e.preventDefault();
-        navigate("/dashboard");
-    }
+        setError("");
+        setLoading(true);
+
+        try {
+            await login(formData.email, formData.password);
+            navigate("/dashboard");
+        } catch (err) {
+            console.error(err);
+            setError("Email ou mot de passe incorrect.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="h-screen bg-[url(./assets/bg-image.jpg)] bg-[#494C4F] bg-cover bg-center bg-blend-multiply flex justify-center">
@@ -18,38 +38,62 @@ function Login() {
                     <h2 className="font-bold text-xl text-white">RED PRODUCT</h2>
                 </div>
 
-                <form className="w-[100%] md:w-[400px] bg-white py-10 px-10 flex flex-col">
-                    <h1>Connectez vous en tant qu'Admin</h1>
+                <form onSubmit={handleLogin} className="w-[100%] md:w-[400px] bg-white py-10 px-10 flex flex-col rounded-md shadow-lg">
+                    <h1 className="text mb-5">Connectez-vous en tant qu'Admin</h1>
 
-                    <div className="mb-5 mt-5">
-                        <input type="email" placeholder="Email" className="py-2 ps-2 border-b border-gray-200 w-full" />
+                    {error && (
+                        <div className="bg-red-100 border border-red-500 text-red-700 p-3 rounded mb-5 text-sm">
+                            {error}
+                        </div>
+                    )}
+
+                    <div className="mb-5">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            className="py-2 ps-2 border-b border-gray-200 w-full outline-none focus:border-[#494C4F]"
+                            value={formData.email}
+                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            required
+                        />
                     </div>
 
                     <div className="mb-5">
-                        <input type="password" placeholder="Password" className="py-2 ps-2 border-b border-gray-200 w-full" />
+                        <input
+                            type="password"
+                            placeholder="Mot de passe"
+                            className="py-2 ps-2 border-b border-gray-200 w-full outline-none focus:border-[#494C4F]"
+                            value={formData.password}
+                            onChange={(e) => setFormData({...formData, password: e.target.value})}
+                            required
+                        />
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <input type="checkbox" name="remember" id="remember"/>
-                        <label htmlFor="remember">Gardez moi connecté</label>
+                        <input type="checkbox" name="remember" id="remember" className="cursor-pointer"/>
+                        <label htmlFor="remember" className="cursor-pointer">Gardez-moi connecté</label>
                     </div>
 
                     <button
                         type="submit"
-                        onClick={redirectToDashboard}
-                        className="bg-[#494C4F] text-white w-full py-2 rounded-md mt-10 cursor-pointer mx-auto"
+                        disabled={loading}
+                        className={`bg-[#494C4F] text-white w-full py-2 rounded-md mt-10 transition-opacity ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-black'}`}
                     >
-                        Se connecter
+                        {loading ? "Connexion en cours..." : "Se connecter"}
                     </button>
                 </form>
 
-                <div className="text-white">
-                    <p className="text-[#FFD964] text-center mt-5 cursor-pointer cursor-pointer" onClick={() => navigate("/forgot-password")}>Mot de passe oublié?</p>
-                    <p className="mt-5">Vous n'avez pas de compte? <span className="text-[#FFD964] text-center cursor-pointer" onClick={() => navigate("/signup")}>s'inscrire</span></p>
+                <div className="text-white text-center">
+                    <p className="text-[#FFD964] mt-5 cursor-pointer hover:underline" onClick={() => navigate("/forgot-password")}>
+                        Mot de passe oublié ?
+                    </p>
+                    <p className="mt-5">
+                        Vous n'avez pas de compte ? <span className="text-[#FFD964] cursor-pointer hover:underline" onClick={() => navigate("/signup")}>S'inscrire</span>
+                    </p>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Login;

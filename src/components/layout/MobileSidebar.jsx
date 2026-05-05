@@ -3,9 +3,14 @@ import { useNavigate } from "react-router-dom";
 import ListingsIcon from "../ui/ListingsIcon.jsx";
 import { RiLayoutMasonryFill } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
+import { useAuth } from "../../contexts/AuthContext.jsx";
 
 function MobileSidebar({isOpen, setIsOpen}) {
     const navigate = useNavigate();
+    const {logout} = useAuth();
+    const handleLogout = ()=> {
+        logout();
+    };
 
     return (
         <aside className={`fixed inset-0 z-50 bg-[url(./assets/bg-image.jpg)] bg-[#494C4F] bg-cover bg-center bg-blend-multiply transition-translate duration-150 flex flex-col
@@ -25,7 +30,7 @@ function MobileSidebar({isOpen, setIsOpen}) {
                 </button>
             </div>
             <div className="flex items-center justify-between mt-auto">
-                <button  className="flex items-center gap-4 py-2 mb-4 text-white cursor-pointer px-5" onClick={() => {navigate('/'); setIsOpen(false)}}>
+                <button  className="flex items-center gap-4 py-2 mb-4 text-white cursor-pointer px-5" onClick={handleLogout}>
                     <MdLogout size={32} />
                     <span className="text-2xl font-bold">Se deconnecter</span>
                 </button>
