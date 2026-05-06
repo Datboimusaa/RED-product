@@ -105,7 +105,7 @@ export const Login = async function (req, res, next) {
   try {
     const { email, password } = req.body;
 
-    const userExists = await usersModel.findOne({ email });
+    const userExists = await usersModel.findOne({ email }).select('+password');
 
     if (!userExists) {
       const error = new Error("invalid email or password");
