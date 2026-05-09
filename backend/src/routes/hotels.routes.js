@@ -8,8 +8,8 @@ const hotelsRoutes = Router();
 
 hotelsRoutes.post('/', authMiddleware, upload.single('image'), createHotel);
 
-hotelsRoutes.get('/', authMiddleware, getHotels);
+hotelsRoutes.get('/', getHotels);
 
-hotelsRoutes.get('/:id', authMiddleware, getHotel)
+hotelsRoutes.get('/:id', getHotel)
 
 export default hotelsRoutes

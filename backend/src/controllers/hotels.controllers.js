@@ -51,7 +51,7 @@ export async function createHotel(req, res, next) {
 
 export async function getHotels(req, res, next) {
   try {
-    const hotels = await hotelsModel.find({ user: req.user.userID });
+    const hotels = await hotelsModel.find();
 
     res.status(200).json({
       success: true,
@@ -71,7 +71,6 @@ export async function getHotel(req, res, next) {
 
     const hotel = await hotelsModel.findOne({
       _id: id,
-      user: req.user.id,
     });
 
     if (!hotel) {

@@ -19,6 +19,7 @@ function Header({ setIsOpen }) {
 
     const handleLogout = ()=> {
         logout();
+        navigate("/")
     };
 
     return (

@@ -1,20 +1,19 @@
 import API from '../services/API';
-import { useContext, useState, createContext, useEffect } from 'react';
+import { useContext, useState, createContext, useEffect, useCallback } from 'react';
 
 const HotelsContext = createContext();
 
 export function HotelsProvider({ children }) {
     const [hotels, setHotels] = useState([]);
 
-    const getHotels = async () => {
+    const getHotels = useCallback(async () => {
         try {
             const res = await API.get('/hotels');
             setHotels(res.data.data);
         } catch (error) {
-            console.error("Couldn't fetch the hotels", error)
+            console.error("Couldn't fetch the hotels", error);
         }
-
-    };
+    }, []);
 
     const createHotel = async (data) => {
         try {
@@ -31,13 +30,13 @@ export function HotelsProvider({ children }) {
             const res = await API.get(`/hotels/${id}`);
             return res.data.data;
         } catch (error) {
-            console.error("Couldn't get hotel", error)
+            console.error("Couldn't get hotel", error);
         }
 
     };
 
     return (
-        <HotelsContext.Provider value={{ hotels, createHotel, getHotel }}>
+        <HotelsContext.Provider value={{ hotels, createHotel, getHotel, getHotels }}>
             {children}
         </HotelsContext.Provider>
     )

@@ -7,10 +7,8 @@ function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        email: "",
-        password: ""
-    });
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -20,7 +18,7 @@ function Login() {
         setLoading(true);
 
         try {
-            await login(formData.email, formData.password);
+            await login(email, password);
             navigate("/dashboard");
         } catch (err) {
             console.error(err);
@@ -38,7 +36,7 @@ function Login() {
                     <h2 className="font-bold text-xl text-white">RED PRODUCT</h2>
                 </div>
 
-                <form onSubmit={handleLogin} className="w-[100%] md:w-[400px] bg-white py-10 px-10 flex flex-col rounded-md shadow-lg">
+                <form onSubmit={handleLogin} className="w-[100%] md:w-[400px] bg-white py-10 px-10 flex flex-col rounded-sm shadow-lg">
                     <h1 className="text mb-5">Connectez-vous en tant qu'Admin</h1>
 
                     {error && (
@@ -52,8 +50,8 @@ function Login() {
                             type="email"
                             placeholder="Email"
                             className="py-2 ps-2 border-b border-gray-200 w-full outline-none focus:border-[#494C4F]"
-                            value={formData.email}
-                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             required
                         />
                     </div>
@@ -63,8 +61,8 @@ function Login() {
                             type="password"
                             placeholder="Mot de passe"
                             className="py-2 ps-2 border-b border-gray-200 w-full outline-none focus:border-[#494C4F]"
-                            value={formData.password}
-                            onChange={(e) => setFormData({...formData, password: e.target.value})}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                     </div>

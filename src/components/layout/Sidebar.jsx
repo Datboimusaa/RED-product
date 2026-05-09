@@ -3,9 +3,11 @@ import ListingsIcon from "../ui/ListingsIcon.jsx";
 import { RiLayoutMasonryFill } from "react-icons/ri";
 import { RxDotFilled } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext.jsx";
 
 
 function Sidebar() {
+    const { user } = useAuth();
     return (
         <aside className="h-screen bg-[url(./assets/bg-image.jpg)] bg-[#494C4F] bg-cover bg-center bg-blend-multiply hidden md:flex flex-col">
             <div className="flex items-center gap-2 py-4 px-5">
@@ -29,7 +31,7 @@ function Sidebar() {
                 <img src="https://thumbs.dreamstime.com/b/default-profile-picture-avatar-photo-placeholder-vector-illustration-default-profile-picture-avatar-photo-placeholder-vector-189495158.jpg"
                     alt="User profile picture" className="rounded-full h-[42px] w-[42px] object-contain"/>
                 <div className="hidden xl:inline">
-                    <h1 className="text-white font-bold">Username</h1>
+                    <h1 className="text-white font-bold">{user?.name || "Utilisateur"}</h1>
                     <h2 className="text-slate-100 text-xs"><RxDotFilled size={20} className="text-green-500 inline"/>en ligne</h2>
                 </div>
             </div>

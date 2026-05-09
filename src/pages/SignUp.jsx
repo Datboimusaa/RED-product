@@ -39,7 +39,7 @@ function SignUp() {
                     <h2 className="font-bold text-xl text-white">RED PRODUCT</h2>
                 </div>
 
-                <form onSubmit={handleSubmit} className="w-[90%] md:w-[400px] bg-white py-10 px-10 flex flex-col shadow-lg">
+                <form onSubmit={handleSubmit} className="w-[90%] md:w-[400px] rounded-sm bg-white py-10 px-10 flex flex-col shadow-lg">
                     <h1 className="mb-4">Inscrivez-vous en tant qu'Admin</h1>
 
                     {status === "success" && (
@@ -76,7 +76,7 @@ function SignUp() {
                 </form>
 
                 <div className="mt-5 mb-10 text-white">
-                    <p>Vous avez déjà un compte? <span className="text-[#FFD964] cursor-pointer font-semibold" onClick={() => navigate("/")}>Se connecter</span></p>
+                    <p>Vous avez déjà un compte? <span className="text-[#FFD964] cursor-pointer hover:underline font-semibold" onClick={() => navigate("/")}>Se connecter</span></p>
                 </div>
             </div>
         </div>

@@ -180,8 +180,11 @@ export const ForgotPassword = async function (req, res, next) {
 
     await sendEmail({
       to: user.email,
-      subject: "Reset Password",
-      html: `<a href="${resetLink}">Reset Password</a>`,
+      subject: "RED product password recovery",
+      html: `<div>
+              <p> Click on the link below to reset your password </p> 
+              <a href="${resetLink}">Reset Password</a>
+            </div>`,
     });
 
     res.status(200).json({

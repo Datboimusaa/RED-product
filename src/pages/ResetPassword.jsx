@@ -14,6 +14,7 @@ function ResetPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            if (!password.trim() || !confirmPassword.trim()){return}
             if (password !== confirmPassword) {
                 setStatus('mismatch');
                 setTimeout(() => setStatus(''), 7000);
@@ -38,7 +39,7 @@ function ResetPassword() {
                 <img src={logo} alt="Logo Red Product" />
                 <h2 className="font-bold text-xl text-white">RED PRODUCT</h2>
             </div>
-            <form onSubmit={handleSubmit} className="w-[100%] md:w-[400px] bg-white py-10 px-10 flex flex-col">
+            <form onSubmit={handleSubmit} className="w-[100%] rounded-sm md:w-[400px] bg-white py-10 px-10 flex flex-col">
                 <h1 className="mb-4">Reinitialisez votre mot de passe</h1>
 
                 <div className="mb-5">
@@ -48,22 +49,22 @@ function ResetPassword() {
                     <input type="password" placeholder="Confirmer le mot de passe" className="py-2 ps-2 border-b border-gray-200 w-full" name="password" value={confirmPassword} required onChange={(e) => { setConfirmPassword(e.target.value) }} />
                 </div>
 
-                {status === "success" &&
-                    <div className="bg-green-200 border text-green-500 border-green-500 rounded-xl p-2">
+                {status === "success" && 
+                    (<div className="bg-green-200 border text-green-500 border-green-500 rounded-xl p-2">
                         <p className="py-2">Mot de passe modifié avec succes</p>
-                    </div>}
+                    </div>)}
 
                 {status === "mismatch" && 
-                    <div className="bg-red-200 border text-red-500 border-red-500 rounded-xl p-2">
+                    (<div className="bg-red-200 border text-red-500 border-red-500 rounded-xl p-2">
                         <p className="py-2">Les mots de passes doivent correspondre</p>
                     </div>
-                }
+                )}
 
                 {status === "failed" && 
-                    <div className="bg-red-200 border text-red-500 border-red-500 rounded-xl p-2">
+                    (<div className="bg-red-200 border text-red-500 border-red-500 rounded-xl p-2">
                         <p className="py-2">une erreur est survenue</p>
                     </div>
-                }
+                )}
 
                 <button type="submit" className="bg-[#494C4F] text-white w-full py-2 rounded-md mt-10 cursor-pointer mx-auto">Reinitialiser</button>
             </form>
