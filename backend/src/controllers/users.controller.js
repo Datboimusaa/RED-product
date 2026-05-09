@@ -32,7 +32,7 @@ export const Register = async function (req, res, next) {
       verificationTokenExpires: Date.now() + 60 * 60 * 1000,
     });
 
-    const verificationLink = `http://localhost:5173/verify-email?token=${verificationTokenRaw}`;
+    const verificationLink = `https://red-product-blue.vercel.app/verify-email?token=${verificationTokenRaw}`;
 
     await sendEmail({
       to: newUser.email,
@@ -176,7 +176,7 @@ export const ForgotPassword = async function (req, res, next) {
 
     await user.save();
 
-    const resetLink = `http://localhost:5173/reset-password?token=${rawToken}`;
+    const resetLink = `https://red-product-blue.vercel.app/reset-password?token=${rawToken}`;
 
     await sendEmail({
       to: user.email,

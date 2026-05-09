@@ -9,7 +9,7 @@ export function HotelsProvider({ children }) {
     const getHotels = useCallback(async () => {
         try {
             const res = await API.get('/hotels');
-            setHotels(res.data.data);
+            setHotels(res.data.data.hotels);
         } catch (error) {
             console.error("Couldn't fetch the hotels", error);
         }
@@ -18,9 +18,12 @@ export function HotelsProvider({ children }) {
     const createHotel = async (data) => {
         try {
             const res = await API.post('/hotels', data);
-            setHotels(prev => [...prev, res.data.data]);
+            const hotel = res.data.data.hotel;
+            setHotels(prev => [...prev, hotel]);
+            return hotel;
         } catch (error) {
             console.error("Couldn't create hotel", error)
+            return null;
         }
 
     };
@@ -28,7 +31,7 @@ export function HotelsProvider({ children }) {
     const getHotel = async (id) => {
         try {
             const res = await API.get(`/hotels/${id}`);
-            return res.data.data;
+            return res.data.data.hotel;
         } catch (error) {
             console.error("Couldn't get hotel", error);
         }

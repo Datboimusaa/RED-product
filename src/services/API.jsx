@@ -4,7 +4,6 @@ const API_URL = 'https://red-product-okrd.onrender.com/api'
 
 const API = axios.create({
     baseURL: API_URL,
-    headers: { "Content-Type": "application/json" }
 })
 
 API.interceptors.request.use(async(config)=> {

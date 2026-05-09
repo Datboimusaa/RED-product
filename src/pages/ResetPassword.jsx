@@ -6,7 +6,7 @@ import API from "../services/API"
 function ResetPassword() {
     const [searchParams] = useSearchParams();
     const token = searchParams.get('token');
-    const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [status, setStatus] = useState('');
     const navigate = useNavigate();
@@ -14,14 +14,14 @@ function ResetPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (!password.trim() || !confirmPassword.trim()){return}
-            if (password !== confirmPassword) {
+            if (!newPassword.trim() || !confirmPassword.trim()){return}
+            if (newPassword !== confirmPassword) {
                 setStatus('mismatch');
                 setTimeout(() => setStatus(''), 7000);
                 return;
             }
 
-            const res = await API.post("/auth/reset-password", { token, password });
+            const res = await API.post("/auth/reset-password", { token, newPassword });
 
             setStatus('success');
             setTimeout(() => { setStatus(''); navigate('/') }, 7000);
@@ -43,7 +43,7 @@ function ResetPassword() {
                 <h1 className="mb-4">Reinitialisez votre mot de passe</h1>
 
                 <div className="mb-5">
-                    <input type="password" placeholder="Nouveau mot de passe" className="py-2 ps-2 border-b border-gray-200 w-full" name="password" value={password} required onChange={(e) => { setPassword(e.target.value) }} />
+                    <input type="password" placeholder="Nouveau mot de passe" className="py-2 ps-2 border-b border-gray-200 w-full" name="password" value={newPassword} required onChange={(e) => { setNewPassword(e.target.value) }} />
                 </div>
                 <div className="mb-2">
                     <input type="password" placeholder="Confirmer le mot de passe" className="py-2 ps-2 border-b border-gray-200 w-full" name="password" value={confirmPassword} required onChange={(e) => { setConfirmPassword(e.target.value) }} />

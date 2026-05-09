@@ -20,11 +20,11 @@ function Listings() {
 
 
     return (
-        <section className="bg-slate-50">
+        <section className="bg-slate-50 min-h-full">
             <div className="bg-white py-5 px-10 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                        <span className="text-2xl font-light">Hôtels</span> <span className="font-light text-2xl text-gray-400">8</span>
+                        <span className="text-2xl font-light">Hôtels</span> <span className="font-light text-2xl text-gray-400">{hotels.length}</span>
                     </div>
                     <button onClick={() => setOpenModal(true)} className="flex items-center gap-2 border border-[#AEAEAE] rounded-xl px-4 py-2 cursor-pointer hover:bg-[#AEAEAE] hover:text-white transition duration-150">
                         <FaPlus />
