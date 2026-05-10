@@ -36,7 +36,7 @@ function Listings() {
                 {loading ? (
                     <p className="text-xl text-center">Chargement en cours...</p>
                 ) : (
-                    hotels.map((hotel) => <Cards key={hotel._id} image={hotel.image} address={hotel.address} name={hotel.name} price={hotel.pricePerNight} />)
+                    hotels.map((hotel) => <Cards key={hotel._id} image={hotel.image} address={hotel.address} name={hotel.name} price={hotel.pricePerNight}  currency={hotel.currency}/>)
                 )}
             </div>
             <CreateHotelModal openModal={openModal} setOpenModal={setOpenModal} />

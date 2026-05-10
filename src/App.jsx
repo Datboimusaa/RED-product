@@ -9,6 +9,9 @@ import Listings from "./pages/Listings";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import { AuthProvider } from "./contexts/AuthContext";
 import { HotelsProvider } from "./contexts/HotelsContext";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import ParamsRoutes from "./components/ParamsRoutes";
+import PublicRoutes from "./components/PublicRoutes";
 
 function App() {
   return (
@@ -16,15 +19,25 @@ function App() {
       <HotelsProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="/dashboard" element={<DashboardLayout />}>
-              <Route index element={<Home />} />
-              <Route path="listings" element={<Listings />} />
+            
+            <Route element={<PublicRoutes />}>
+              <Route path="/" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
             </Route>
+
+            <Route element={<ParamsRoutes requiredParam="token" />}>
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
+            </Route>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<DashboardLayout />}>
+                <Route path="/dashboard" element={<Home />} />
+                <Route path="/listings" element={<Listings />} />
+              </Route>
+            </Route>
+
           </Routes>
         </BrowserRouter>
       </HotelsProvider>

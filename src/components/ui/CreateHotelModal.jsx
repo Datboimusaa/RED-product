@@ -104,7 +104,7 @@ function CreateHotelModal({ openModal, setOpenModal }) {
                         </div>
                         <div className="flex flex-col w-full">
                             <label htmlFor="hotel-number">Numéro de téléphone</label>
-                            <input id="hotel-number" value={number} onChange={(e) => setNumber(e.target.value)} type="tel" className="ps-2 py-2 border border-gray-200 rounded-xl" />
+                            <input id="hotel-number" value={number} onChange={(e) => setNumber(e.target.value.replace(/\s/g, ''))} type="tel" className="ps-2 py-2 border border-gray-200 rounded-xl" />
                         </div>
                     </div>
 
@@ -115,7 +115,15 @@ function CreateHotelModal({ openModal, setOpenModal }) {
                         </div>
                         <div className="flex flex-col w-full">
                             <label htmlFor="hotel-currency">Devise</label>
-                            <input id="hotel-currency" value={currency} onChange={(e) => setCurrency(e.target.value)} type="text" className="ps-2 py-2 border border-gray-200 rounded-xl" />
+                            <select
+                                id="hotel-currency"
+                                value={currency}
+                                onChange={(e) => setCurrency(e.target.value)}
+                                className="ps-2 py-2 border border-gray-200 rounded-xl">
+                                <option value="XOF" default>F CFA (XOF)</option>
+                                <option value="EUR">Euro (€)</option>
+                                <option value="USD">Dollar ($)</option>
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ function Header({ setIsOpen }) {
     const { pathname } = useLocation();
     const routeConfig = {
         "/dashboard": "Dashboard",
-        "/dashboard/listings": "Liste des hotels"
+        "/listings": "Liste des hotels"
     }
     const navigate = useNavigate();
 

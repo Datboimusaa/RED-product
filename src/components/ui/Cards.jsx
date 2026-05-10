@@ -1,4 +1,4 @@
-function Cards({image, address, name, price}) {
+function Cards({image, address, name, price, currency}) {
     return(
         <div className="bg-white rounded-xl  max-h-[400px] overflow-hidden cursor-pointer">
             <div className="h-[60%] ">
@@ -7,7 +7,7 @@ function Cards({image, address, name, price}) {
             <div className="h-[40%] px-5 py-5">
                 <p className="text-sm text-[#8D4B38] h-[20%] ">{address}</p>
                 <h2 className="text-xl h-[40%] truncate">{name}</h2>
-                <p className="h-[40%]">{price}</p>
+                <p className="h-[40%]">{price} {currency}</p>
             </div>
         </div>
     )
